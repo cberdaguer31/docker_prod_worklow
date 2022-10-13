@@ -1,0 +1,9 @@
+language: generic
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t cberdaguer31/docker_prod_worklow -f Dockerfile.dev .
+script:
+  - docker run -e CI=true cberdaguer31/docker_prod_worklow npm run test
