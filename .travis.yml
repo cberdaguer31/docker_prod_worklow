@@ -7,3 +7,14 @@ before_install:
   - docker build -t cberdaguer31/docker_prod_worklow -f Dockerfile.dev .
 script:
   - docker run -e CI=true cberdaguer31/docker_prod_worklow npm run test
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker_prod_test"
+  env: "Dockerprodtest-env"
+  bucket_name: "elasticbeanstalk-us-east-1-372975917657"
+  bucket_path: "docker_prod_test"
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_SECRET_KEY"
